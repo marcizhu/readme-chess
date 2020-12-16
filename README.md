@@ -1,4 +1,5 @@
-# Chess from a GitHub README
+# GitHub README Chess Tournament
+
 This is an open chess tournament where ANYONE can play. That's the fun part.  
 It's your turn to play! Move a <!-- BEGIN TURN -->white<!-- END TURN --> piece.
 
