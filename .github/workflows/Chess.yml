@@ -1,0 +1,57 @@
+name: Chess
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  move:
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.issue.title, 'Chess:')
+
+    steps:
+      - name: Set env vars
+        run: |
+          echo "ISSUE_NUMBER=${{ github.event.issue.number }}" >> $GITHUB_ENV
+          echo "GH_ACCESS_TOKEN=${{ secrets.GH_ACCESS_TOKEN }}" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v2
+
+      # The python action will set us a Python 3.8 (64-bit) instance.
+      - name: Setting up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+          architecture: "x64"
+
+      # Use pip to install the dependencies and then run the script.
+      - name: Play chess
+        run: |
+          pip install -r requirements.txt
+          python main.py
+
+      - uses: EndBug/add-and-commit@v5 # You can change this to use a specific version
+        with:
+          add: '.'
+          author_name: chessbot
+          author_email: chessbot@example.com
+
+          # The message for the commit
+          # Default: 'Commit from GitHub Actions (name of the workflow)'
+          message: '@${{ github.event.issue.user.login }} move chess'
+
+          # The flag used on the pull strategy
+          # Default: '--no-rebase'
+          pull_strategy: '--no-rebase or --no-ff or --rebase'
+
+          # Whether to push the commit and, if any, its tags to the repo (only `true` and `false` are accepted)
+          # Default: true
+          push: true
+
+          # Whether to use the --signoff option on `git commit` (only `true` and `false` are accepted)
+          # Default: false
+          signoff: false
+
+        env:
+          # This is necessary in order to push a commit to the repo
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
