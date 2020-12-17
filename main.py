@@ -92,7 +92,8 @@ def main():
 		
 		# Perform move
 		board.push(move)
-		game.add_main_variation(move, comment=issue_author)
+		game.end().add_main_variation(move)
+		game.headers["Result"] = board.result()
 
 		# Save game to "games/current.pgn"
 		print(game, file=open("games/current.pgn", "w"), end="\n\n")
