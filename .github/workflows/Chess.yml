@@ -33,6 +33,7 @@ jobs:
       - uses: EndBug/add-and-commit@v5 # You can change this to use a specific version
         with:
           add: '.'
+          remove: './src/__pycache__/*'
           author_name: chessbot
           author_email: chessbot@example.com
 
@@ -42,15 +43,11 @@ jobs:
 
           # The flag used on the pull strategy
           # Default: '--no-rebase'
-          pull_strategy: '--no-rebase or --no-ff or --rebase'
+          pull_strategy: '--no-rebase'
 
           # Whether to push the commit and, if any, its tags to the repo (only `true` and `false` are accepted)
           # Default: true
           push: true
-
-          # Whether to use the --signoff option on `git commit` (only `true` and `false` are accepted)
-          # Default: false
-          signoff: false
 
         env:
           # This is necessary in order to push a commit to the repo
