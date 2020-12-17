@@ -5,13 +5,21 @@ GITHUB_USER      = "marcizhu"      # GitHub user where this file is located
 GITHUB_REPO_NAME = "readme-chess"  # GitHub repo for this project
 
 # Contents of the issue to create as a template
-GITHUB_ISSUE_CONTENTS = {
+GITHUB_MOVE_ISSUE_CONTENTS = {
 	"title": "Chess: Move {source} to {dest}",
 	"body": "Please do not change the title. Just click \"Submit new issue\". You don't need to do anything else :D"
 }
 
-# Link of the issue
-GITHUB_ISSUE_LINK = "https://github.com/" + GITHUB_USER + "/" + GITHUB_REPO_NAME + "/issues/new?" + urlencode(GITHUB_ISSUE_CONTENTS, safe="{}")
+GITHUB_NEW_GAME_ISSUE_CONTENTS = {
+	"title": "Chess: Start new game",
+	"body": "Please do not change the title. Just click \"Submit new issue\". You don't need to do anything else :D"
+}
+
+# Link of the move issue
+GITHUB_MOVE_ISSUE_LINK = "https://github.com/" + GITHUB_USER + "/" + GITHUB_REPO_NAME + "/issues/new?" + urlencode(GITHUB_MOVE_ISSUE_CONTENTS, safe="{}")
+
+# Link of the new game issue
+GITHUB_NEW_GAME_ISSUE_LINK = "https://github.com/" + GITHUB_USER + "/" + GITHUB_REPO_NAME + "/issues/new?" + urlencode(GITHUB_NEW_GAME_ISSUE_CONTENTS)
 
 # Markers
 # Chess board marker

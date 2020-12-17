@@ -12,13 +12,14 @@ def create_issue_link(source, dest_list):
 	ret = []
 
 	for dest in dest_list:
-		ret.append(create_link(dest, tweaks.GITHUB_ISSUE_LINK.format(source=source, dest=dest)))
+		ret.append(create_link(dest, tweaks.GITHUB_MOVE_ISSUE_LINK.format(source=source, dest=dest)))
 
 	return ", ".join(ret)
 
 
-def generate_moves_list(moves):
+def generate_moves_list(board):
 	# Create dictionary and fill it
+	moves = list(board.legal_moves)
 	moves_dict = defaultdict(list)
 
 	for move in moves:
@@ -29,6 +30,12 @@ def generate_moves_list(moves):
 
 	# Write everything in Markdown format
 	markdown = ""
+
+	if board.is_game_over():
+		return "**GAME IS OVER!** " + create_link("Click here", tweaks.GITHUB_NEW_GAME_ISSUE_LINK) + " to start a new game :D\n"
+	elif board.is_check():
+		markdown += "**CHECK!** Choose your move wisely!\n"
+
 	markdown += "|  FROM  | TO (Just click a link!) |\n"
 	markdown += "| :----: | :---------------------- |\n"
 
@@ -93,4 +100,3 @@ def board_to_markdown(board):
 	markdown += "|   | **A** | **B** | **C** | **D** | **E** | **F** | **G** | **H** |   |\n"
 
 	return markdown
-
