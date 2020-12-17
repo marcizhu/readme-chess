@@ -44,11 +44,13 @@ Have you spotted a bug? Something missing? Feel free to open an [issue](https://
 
 <details>
   <summary>Last 5 moves in this game</summary>
-  TODO
+  <!-- BEGIN LAST MOVES -->
+  <!-- END LAST MOVES -->
 </details>
 
 <details>
   <summary>Top 10 moves across all games</summary>
-  TODO
+  <!-- BEGIN TOP MOVES -->
+  <!-- END TOP MOVES -->
 </details>
 
