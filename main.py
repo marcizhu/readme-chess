@@ -67,7 +67,7 @@ def main():
 		issue.create_comment(issue_author + " done! New game successfully started!")
 		issue.edit(state='closed')
 
-		with open("data/last_moves.txt", 'r+') as f:
+		with open("data/last_moves.txt", 'w') as f:
 			f.write("Start game: " + issue_author)
 
 		# Create new game
