@@ -24,12 +24,20 @@ GITHUB_NEW_GAME_ISSUE_LINK = "https://github.com/" + GITHUB_USER + "/" + GITHUB_
 # Markers
 # Chess board marker
 BOARD_BEGIN_MARKER = "<!-- BEGIN CHESS BOARD -->\n"
-BOARD_END_MARKER = "<!-- END CHESS BOARD -->\n"
+BOARD_END_MARKER   = "<!-- END CHESS BOARD -->\n"
 
 # Moves list marker
 MOVES_BEGIN_MARKER = "<!-- BEGIN MOVES LIST -->\n"
-MOVES_END_MARKER = "<!-- END MOVES LIST -->\n"
+MOVES_END_MARKER   = "<!-- END MOVES LIST -->\n"
 
 # Turn marker
 TURN_BEGIN_MARKER = "<!-- BEGIN TURN -->"
-TURN_END_MARKER = "<!-- END TURN -->"
+TURN_END_MARKER   = "<!-- END TURN -->"
+
+# Last moves marker
+LAST_MOVES_BEGIN_MARKER = "<!-- BEGIN LAST MOVES -->\n"
+LAST_MOVES_END_MARKER   = "<!-- END LAST MOVES -->\n"
+
+# Top movers marker
+TOP_MOVERS_BEGIN_MARKER = "<!-- BEGIN TOP MOVES -->\n"
+TOP_MOVERS_END_MARKER   = "<!-- END TOP MOVES -->\n"

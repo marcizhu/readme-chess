@@ -5,6 +5,7 @@ import sys
 import chess
 import chess.pgn
 
+from github import Github
 from enum import Enum
 from datetime import datetime
 
@@ -42,10 +43,12 @@ def parse_issue(title):
 
 
 def main():
-	print("Issue title: ", end='')
-	issue_title = input()
-	print("Issue author: ", end='')
-	issue_author = input()
+	g = Github(os.environ["GH_ACCESS_TOKEN"])
+	repo = g.get_repo(tweaks.GITHUB_USER + "/" + tweaks.GITHUB_REPO_NAME)
+	issue = repo.get_issue(number=int(os.environ["ISSUE_NUMBER"]))
+
+	issue_title  = issue.title
+	issue_author = "@" + issue.user.login
 
 	action = parse_issue(issue_title)
 	board = chess.Board()
@@ -55,15 +58,15 @@ def main():
 			sys.exit("ERROR: A current game is in progress. Only the repo owner can start a new issue")
 
 		print("Start new game")
+		issue.create_comment(issue_author + " done! New game successfully started!")
+		issue.edit(state='closed')
+
 		# Create new game
 		game = chess.pgn.Game()
 		game.headers["Event"] = tweaks.GITHUB_USER + "'s Online Open Chess Tournament"
 		game.headers["Site"] = "https://github.com/" + tweaks.GITHUB_USER + "/" + tweaks.GITHUB_REPO_NAME
 		game.headers["Date"] = datetime.now().strftime("%Y.%m.%d")
 		game.headers["Round"] = "1"
-
-		# Save new game to "games/current.pgn"
-		print(game, file=open("games/current.pgn", "w"), end="\n\n")
 
 	elif action[0] == Action.MOVE:
 		if not os.path.exists("games/current.pgn"):
@@ -84,26 +87,35 @@ def main():
 
 		# Check if move is valid
 		if not move in board.legal_moves:
+			issue.create_comment(issue_author + " Whaaaat? The move `" + action[1] + "` is invalid!\nMaybe someone squished a move before you. Please try again.")
+			issue.edit(state='closed')
 			sys.exit("ERROR: Move is invalid!")
 
 		# Check if board is valid
 		if not board.is_valid():
+			issue.create_comment(issue_author + " Sorry, I can't perform the specified move. The board is invalid!")
+			issue.edit(state='closed')
 			sys.exit("ERROR: Board is invalid!")
 		
+		issue.create_comment(issue_author + " done! Successfully played move `" + action[1] + "` for current game.\nThanks for playing!")
+		issue.edit(state='closed')
+
 		# Perform move
 		board.push(move)
-		game.end().add_main_variation(move)
+		game.end().add_main_variation(move, comment=issue_author)
 		game.headers["Result"] = board.result()
 
-		# Save game to "games/current.pgn"
-		print(game, file=open("games/current.pgn", "w"), end="\n\n")
-
-		# If it is a game over, archive current game
-		if board.is_game_over():
-			os.rename("games/current.pgn", datetime.now().strftime("games/game-%Y%m%d-%H%M%S.pgn"))
-
 	elif action[0] == Action.UNKNOWN:
+		issue.create_comment(issue_author + " Sorry, I can't understand the command. Please try again and do not modify the issue title!")
+		issue.edit(state='closed')
 		sys.exit("ERROR: Unknown action")
+
+	# Save game to "games/current.pgn"
+	print(game, file=open("games/current.pgn", "w"), end="\n\n")
+
+	# If it is a game over, archive current game
+	if board.is_game_over():
+		os.rename("games/current.pgn", datetime.now().strftime("games/game-%Y%m%d-%H%M%S.pgn"))
 
 	turn = "white" if board.turn == chess.WHITE else "black"
 	moves = markdown.generate_moves_list(board)
@@ -114,9 +126,12 @@ def main():
 		readme = replaceTextBetween(readme, tweaks.BOARD_BEGIN_MARKER, tweaks.BOARD_END_MARKER, "{chess_board}")
 		readme = replaceTextBetween(readme, tweaks.MOVES_BEGIN_MARKER, tweaks.MOVES_END_MARKER, "{moves_list}")
 		readme = replaceTextBetween(readme, tweaks.TURN_BEGIN_MARKER,  tweaks.TURN_END_MARKER,  "{turn}")
+		readme = replaceTextBetween(readme, tweaks.LAST_MOVES_BEGIN_MARKER, tweaks.LAST_MOVES_END_MARKER, "{last_moves}")
+		readme = replaceTextBetween(readme, tweaks.TOP_MOVERS_BEGIN_MARKER, tweaks.TOP_MOVERS_END_MARKER, "{top_moves}")
 
 	with open("README.md", "w") as file:
-		file.write(readme.format(chess_board=board, moves_list=moves, turn=turn)) # Write new board & list of movements
+		# Write new board & list of movements
+		file.write(readme.format(chess_board=board, moves_list=moves, turn=turn))
 
 
 if __name__ == "__main__":
