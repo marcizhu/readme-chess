@@ -1,3 +1,4 @@
+import re
 import chess
 import src.tweaks as tweaks
 
@@ -30,7 +31,15 @@ def generate_last_moves():
 			if not ":" in line: continue
 			if counter >= tweaks.MAX_LAST_MOVERS: break
 			counter += 1
-			markdown += "| `" + parts[0] + "` | " + create_link(parts[1], "https://github.com/" + (parts[1])[1:]) + " |\n"
+
+			matchObj = re.search('([A-H][1-8])([A-H][1-8])', line, re.I)
+			if matchObj != None:
+				source = matchObj.group(1).upper()
+				dest   = matchObj.group(2).upper()
+
+				markdown += "| `" + source + "` to `" + dest + "` | " + create_link(parts[1], "https://github.com/" + parts[1].lstrip()[1:]) + " |\n"
+			else:
+				markdown += "| `" + parts[0] + "` | " + create_link(parts[1], "https://github.com/" + parts[1].lstrip()[1:]) + " |\n"
 
 	return markdown + "\n"
 
