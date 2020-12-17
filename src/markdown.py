@@ -17,6 +17,23 @@ def create_issue_link(source, dest_list):
 	return ", ".join(ret)
 
 
+def generate_last_moves():
+	markdown  = "| Move | Author |\n"
+	markdown += "| :--: | :----- |\n"
+
+	counter = 0
+
+	with open("data/last_moves.txt", 'r') as file:
+		for line in file.readlines():
+			parts = line.rstrip().split(':')
+			if not ":" in line: continue
+			counter += 1
+			if counter > tweaks.MAX_LAST_MOVERS: break
+			markdown += "| `" + parts[0] + "` | " + parts[1] + " |\n"
+
+	return markdown
+
+
 def generate_moves_list(board):
 	# Create dictionary and fill it
 	moves = list(board.legal_moves)

@@ -18,6 +18,12 @@ class Action(Enum):
 	MOVE = 1
 	NEW_GAME = 2
 
+def update_last_moves(line):
+	with open("data/last_moves.txt", 'r+') as f:
+		content = f.read()
+		f.seek(0, 0)
+		f.write(line.rstrip('\r\n') + '\n' + content)
+
 
 def replaceTextBetween(originalText, delimeterA, delimterB, replacementText):
 	if originalText.find(delimeterA) == -1 or originalText.find(delimterB) == -1:
@@ -61,6 +67,9 @@ def main():
 		issue.create_comment(issue_author + " done! New game successfully started!")
 		issue.edit(state='closed')
 
+		with open("data/last_moves.txt", 'r+') as f:
+			f.write("Start game: " + issue_author)
+
 		# Create new game
 		game = chess.pgn.Game()
 		game.headers["Event"] = tweaks.GITHUB_USER + "'s Online Open Chess Tournament"
@@ -100,6 +109,8 @@ def main():
 		issue.create_comment(issue_author + " done! Successfully played move `" + action[1] + "` for current game.\nThanks for playing!")
 		issue.edit(state='closed')
 
+		update_last_moves(action[1] + ": " + issue_author)
+
 		# Perform move
 		board.push(move)
 		game.end().add_main_variation(move, comment=issue_author)
@@ -116,10 +127,12 @@ def main():
 	# If it is a game over, archive current game
 	if board.is_game_over():
 		os.rename("games/current.pgn", datetime.now().strftime("games/game-%Y%m%d-%H%M%S.pgn"))
+		os.delete("data/last_moves.txt")
 
 	turn = "white" if board.turn == chess.WHITE else "black"
 	moves = markdown.generate_moves_list(board)
 	board = markdown.board_to_markdown(board)
+	lasts = markdown.generate_last_moves()
 
 	with open("README.md", "r") as file:
 		readme = file.read()
@@ -131,7 +144,7 @@ def main():
 
 	with open("README.md", "w") as file:
 		# Write new board & list of movements
-		file.write(readme.format(chess_board=board, moves_list=moves, turn=turn))
+		file.write(readme.format(chess_board=board, moves_list=moves, turn=turn, last_moves=lasts, top_moves=""))
 
 
 if __name__ == "__main__":

@@ -21,6 +21,9 @@ GITHUB_MOVE_ISSUE_LINK = "https://github.com/" + GITHUB_USER + "/" + GITHUB_REPO
 # Link of the new game issue
 GITHUB_NEW_GAME_ISSUE_LINK = "https://github.com/" + GITHUB_USER + "/" + GITHUB_REPO_NAME + "/issues/new?" + urlencode(GITHUB_NEW_GAME_ISSUE_CONTENTS)
 
+# Maximum moves to display
+MAX_LAST_MOVERS = 5
+
 # Markers
 # Chess board marker
 BOARD_BEGIN_MARKER = "<!-- BEGIN CHESS BOARD -->\n"
