@@ -57,7 +57,7 @@ def main():
 	issue_author = "@" + issue.user.login
 
 	action = parse_issue(issue_title)
-	board = chess.Board()
+	gameboard = chess.Board()
 
 	if action[0] == Action.NEW_GAME:
 		if os.path.exists("games/current.pgn") and issue_author != "@" + tweaks.GITHUB_USER:
@@ -84,10 +84,10 @@ def main():
 		# Load game from "games/current.pgn"
 		pgn_file = open("games/current.pgn")
 		game = chess.pgn.read_game(pgn_file)
-		board = game.board()
+		gameboard = game.board()
 
 		for move in game.mainline_moves():
-			board.push(move)
+			gameboard.push(move)
 
 		print("Perform move " + action[1])
 
@@ -95,13 +95,13 @@ def main():
 		move = chess.Move.from_uci(action[1])
 
 		# Check if move is valid
-		if not move in board.legal_moves:
+		if not move in gameboard.legal_moves:
 			issue.create_comment(issue_author + " Whaaaat? The move `" + action[1] + "` is invalid!\nMaybe someone squished a move before you. Please try again.")
 			issue.edit(state='closed')
 			sys.exit("ERROR: Move is invalid!")
 
 		# Check if board is valid
-		if not board.is_valid():
+		if not gameboard.is_valid():
 			issue.create_comment(issue_author + " Sorry, I can't perform the specified move. The board is invalid!")
 			issue.edit(state='closed')
 			sys.exit("ERROR: Board is invalid!")
@@ -112,9 +112,9 @@ def main():
 		update_last_moves(action[1] + ": " + issue_author)
 
 		# Perform move
-		board.push(move)
+		gameboard.push(move)
 		game.end().add_main_variation(move, comment=issue_author)
-		game.headers["Result"] = board.result()
+		game.headers["Result"] = gameboard.result()
 
 	elif action[0] == Action.UNKNOWN:
 		issue.create_comment(issue_author + " Sorry, I can't understand the command. Please try again and do not modify the issue title!")
@@ -124,15 +124,15 @@ def main():
 	# Save game to "games/current.pgn"
 	print(game, file=open("games/current.pgn", "w"), end="\n\n")
 
-	# If it is a game over, archive current game
-	if board.is_game_over():
-		os.rename("games/current.pgn", datetime.now().strftime("games/game-%Y%m%d-%H%M%S.pgn"))
-		os.delete("data/last_moves.txt")
-
-	turn = "white" if board.turn == chess.WHITE else "black"
-	moves = markdown.generate_moves_list(board)
-	board = markdown.board_to_markdown(board)
+	turn = "white" if gameboard.turn == chess.WHITE else "black"
+	moves = markdown.generate_moves_list(gameboard)
+	board = markdown.board_to_markdown(gameboard)
 	lasts = markdown.generate_last_moves()
+
+	# If it is a game over, archive current game
+	if gameboard.is_game_over():
+		os.rename("games/current.pgn", datetime.now().strftime("games/game-%Y%m%d-%H%M%S.pgn"))
+		os.remove("data/last_moves.txt")
 
 	with open("README.md", "r") as file:
 		readme = file.read()
@@ -144,7 +144,7 @@ def main():
 
 	with open("README.md", "w") as file:
 		# Write new board & list of movements
-		file.write(readme.format(chess_board=board, moves_list=moves, turn=turn, last_moves=lasts, top_moves=""))
+		file.write(readme.format(chess_board=board, moves_list=moves, turn=turn, last_moves=lasts, top_moves="TODO\n"))
 
 
 if __name__ == "__main__":
