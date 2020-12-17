@@ -11,7 +11,7 @@ def create_link(text, link):
 def create_issue_link(source, dest_list):	
 	ret = []
 
-	for dest in dest_list:
+	for dest in sorted(dest_list):
 		ret.append(create_link(dest, tweaks.GITHUB_MOVE_ISSUE_LINK.format(source=source, dest=dest)))
 
 	return ", ".join(ret)
@@ -39,7 +39,7 @@ def generate_moves_list(board):
 	markdown += "|  FROM  | TO (Just click a link!) |\n"
 	markdown += "| :----: | :---------------------- |\n"
 
-	for source,dest in moves_dict.items():
+	for source,dest in sorted(moves_dict.items()):
 		markdown += "| **" + source + "** | " + create_issue_link(source, dest) + " |\n"
 
 	return markdown
