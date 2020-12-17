@@ -18,7 +18,8 @@ def create_issue_link(source, dest_list):
 
 
 def generate_last_moves():
-	markdown  = "| Move | Author |\n"
+	markdown = "\n"
+	markdown += "| Move | Author |\n"
 	markdown += "| :--: | :----- |\n"
 
 	counter = 0
@@ -27,11 +28,11 @@ def generate_last_moves():
 		for line in file.readlines():
 			parts = line.rstrip().split(':')
 			if not ":" in line: continue
+			if counter >= tweaks.MAX_LAST_MOVERS: break
 			counter += 1
-			if counter > tweaks.MAX_LAST_MOVERS: break
-			markdown += "| `" + parts[0] + "` | " + parts[1] + " |\n"
+			markdown += "| `" + parts[0] + "` | " + create_link(parts[1], "https://github.com/" + (parts[1])[1:]) + " |\n"
 
-	return markdown
+	return markdown + "\n"
 
 
 def generate_moves_list(board):
