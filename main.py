@@ -108,12 +108,13 @@ def main():
 	moves = markdown.generate_moves_list(board)
 	board = markdown.board_to_markdown(board)
 
-	with open("README.md", "r+") as file:
+	with open("README.md", "r") as file:
 		readme = file.read()
 		readme = replaceTextBetween(readme, tweaks.BOARD_BEGIN_MARKER, tweaks.BOARD_END_MARKER, "{chess_board}")
 		readme = replaceTextBetween(readme, tweaks.MOVES_BEGIN_MARKER, tweaks.MOVES_END_MARKER, "{moves_list}")
 		readme = replaceTextBetween(readme, tweaks.TURN_BEGIN_MARKER,  tweaks.TURN_END_MARKER,  "{turn}")
-		file.seek(0) # Truncate file
+
+	with open("README.md", "w") as file:
 		file.write(readme.format(chess_board=board, moves_list=moves, turn=turn)) # Write new board & list of movements
 
 
