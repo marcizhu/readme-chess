@@ -15,7 +15,6 @@ import src.markdown as markdown
 
 # TODO:
 # - Try to promote to queen if possible
-# - Save list of all players in a match and mention them on a check mate/end of game
 # - Use an image instead of a raw link to start new games
 # - Cleanup, turn this repo into a template. Add info about how to set it up and open source it
 # - Move contents to marcizhu/marcizhu
@@ -45,6 +44,11 @@ def update_last_moves(line):
 		content = f.read()
 		f.seek(0, 0)
 		f.write(line.rstrip('\r\n') + '\n' + content)
+
+
+def update_player_list(player):
+	with open("data/players.txt", "a+") as f:
+		f.write(player + "\n")
 
 
 def replaceTextBetween(originalText, delimeterA, delimterB, replacementText):
@@ -135,6 +139,7 @@ def main():
 
 		update_last_moves(action[1] + ": " + issue_author)
 		update_top_moves(issue_author)
+		update_player_list(issue_author)
 
 		# Perform move
 		gameboard.push(move)
@@ -165,9 +170,13 @@ def main():
 		elif winner == "0-1":
 			win_msg = "Black wins"
 
-		issue.create_comment(tweaks.COMMENT_GAME_OVER.format(winner=win_msg, players="everyone")) # TODO: ping players
+		with open("data/players.txt", "r") as f:
+			players = ", ".join([x.strip() for x in set(f.readlines())])
+
+		issue.create_comment(tweaks.COMMENT_GAME_OVER.format(winner=win_msg, players=players))
 		os.rename("games/current.pgn", datetime.now().strftime("games/game-%Y%m%d-%H%M%S.pgn"))
 		os.remove("data/last_moves.txt")
+		os.remove("data/players.txt")
 
 	with open("README.md", "r") as file:
 		readme = file.read()
