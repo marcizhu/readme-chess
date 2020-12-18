@@ -14,7 +14,7 @@ jobs:
       - name: Setting up environment
         run: |
           echo "ISSUE_NUMBER=${{ github.event.issue.number }}" >> $GITHUB_ENV
-          echo "GH_ACCESS_TOKEN=${{ secrets.GH_ACCESS_TOKEN }}" >> $GITHUB_ENV
+          echo "GH_ACCESS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
 
       - uses: actions/checkout@v2
 
@@ -35,8 +35,8 @@ jobs:
       - uses: EndBug/add-and-commit@v5
         with:
           add: '.'
-          author_name: chessbot
-          author_email: chessbot@example.com
+          author_name: github-actions[bot]
+          author_email: github-actions[bot]@users.noreply.github.com
           message: '@${{ github.event.issue.user.login }} move chess'
           push: true
 
