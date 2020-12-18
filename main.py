@@ -171,9 +171,10 @@ def main():
 			win_msg = "Black wins"
 
 		with open("data/players.txt", "r") as f:
-			players = ", ".join([x.strip() for x in set(f.readlines())])
+			lines = [x.strip() for x in f.readlines()]
+			players = ", ".join(set(lines))
 
-		issue.create_comment(tweaks.COMMENT_GAME_OVER.format(winner=win_msg, players=players))
+		issue.create_comment(tweaks.COMMENT_GAME_OVER.format(winner=win_msg, players=players, num_moves=len(lines), num_players=len(players)))
 		os.rename("games/current.pgn", datetime.now().strftime("games/game-%Y%m%d-%H%M%S.pgn"))
 		os.remove("data/last_moves.txt")
 		os.remove("data/players.txt")

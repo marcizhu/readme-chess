@@ -65,4 +65,4 @@ COMMENT_SUCCESSFUL_NEW_GAME="{author} done! New game successfully started!"
 COMMENT_UNKNOWN_COMMAND="{author} Sorry, I can't understand the command. Please try again and do not modify the issue title!"
 
 # Comment for game overs
-COMMENT_GAME_OVER="And that's a game over! {winner}! Thanks to {players} for participating!"
+COMMENT_GAME_OVER="And that's a game over! {winner}! This game had {num_moves} moves made by {num_players}.\n\nThanks to {players} for participating!"
