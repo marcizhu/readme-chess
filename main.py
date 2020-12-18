@@ -4,6 +4,7 @@ import os.path
 import sys
 import chess
 import chess.pgn
+import ast
 
 from github import Github
 from enum import Enum
@@ -17,7 +18,6 @@ import src.markdown as markdown
 # - Try to promote to queen if possible
 # - Save list of all players in a match and mention them on a check mate/end of game
 # - Add info about winner (who wins, remove "Move a black/while piece" message in that round)
-# - Save stats about all players, do Top X players list and add it
 # - Use an image instead of a raw link to start new games
 # - Cleanup, turn this repo into a template. Add info about how to set it up and open source it
 # - Move contents to marcizhu/marcizhu
@@ -27,6 +27,21 @@ class Action(Enum):
 	UNKNOWN = 0
 	MOVE = 1
 	NEW_GAME = 2
+
+
+def update_top_moves(user):
+	with open("data/top_moves.txt", 'r') as file:
+		contents = file.read()
+		dictionary = ast.literal_eval(contents)
+
+	if user not in dictionary:
+		dictionary[user] = 1 # First move
+	else:
+		dictionary[user] += 1
+
+	with open("data/top_moves.txt", 'w') as file:
+		file.write(str(dictionary))
+
 
 def update_last_moves(line):
 	with open("data/last_moves.txt", 'r+') as f:
@@ -120,6 +135,7 @@ def main():
 		issue.edit(state='closed')
 
 		update_last_moves(action[1] + ": " + issue_author)
+		update_top_moves(issue_author)
 
 		# Perform move
 		gameboard.push(move)
@@ -138,6 +154,7 @@ def main():
 	moves = markdown.generate_moves_list(gameboard)
 	board = markdown.board_to_markdown(gameboard)
 	lasts = markdown.generate_last_moves()
+	top   = markdown.generate_top_moves()
 
 	# If it is a game over, archive current game
 	if gameboard.is_game_over():
@@ -154,7 +171,7 @@ def main():
 
 	with open("README.md", "w") as file:
 		# Write new board & list of movements
-		file.write(readme.format(chess_board=board, moves_list=moves, turn=turn, last_moves=lasts, top_moves="TODO\n"))
+		file.write(readme.format(chess_board=board, moves_list=moves, turn=turn, last_moves=lasts, top_moves=top))
 
 
 if __name__ == "__main__":

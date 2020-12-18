@@ -1,4 +1,5 @@
 import re
+import ast
 import chess
 import src.tweaks as tweaks
 
@@ -16,6 +17,25 @@ def create_issue_link(source, dest_list):
 		ret.append(create_link(dest, tweaks.GITHUB_MOVE_ISSUE_LINK.format(source=source, dest=dest)))
 
 	return ", ".join(ret)
+
+
+def generate_top_moves():
+	with open("data/top_moves.txt", 'r') as file:
+		contents = file.read()
+		dictionary = ast.literal_eval(contents)
+
+	markdown = "\n"
+	markdown += "| Total moves |  User  |\n"
+	markdown += "| :---------: | :----- |\n"
+
+	counter = 0
+	for key,val in sorted(dictionary.items(), key=lambda x: x[1], reverse=True):
+		if counter >= tweaks.MAX_TOP_MOVERS: break
+		counter += 1
+		markdown += "| " + str(val) + " | " + create_link(key, "https://github.com/" + key[1:]) + " |\n"
+
+	return markdown + "\n"
+
 
 
 def generate_last_moves():

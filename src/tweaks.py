@@ -24,6 +24,9 @@ GITHUB_NEW_GAME_ISSUE_LINK = "https://github.com/" + GITHUB_USER + "/" + GITHUB_
 # Maximum moves to display
 MAX_LAST_MOVERS = 5
 
+# Top most moves to display
+MAX_TOP_MOVERS = 10
+
 # Markers
 # Chess board marker
 BOARD_BEGIN_MARKER = "<!-- BEGIN CHESS BOARD -->\n"
