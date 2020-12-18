@@ -5,7 +5,7 @@ This template repository contains the source code for a Python Chess bot, togeth
 
 ## Steps to make your own repo
 
-1. First, create a new repository based on this template. Call it whatever you want!
+1. Create a new repository based on this template.
 
 2. Tweak the bot settings to your linking. These settings are located in the file `src/tweaks.py`. Specially, make sure to update the following parameters:
     - `GITHUB_USER`: Your GitHub username
@@ -24,14 +24,14 @@ Don't forget to share, have fun and enjoy your games!
 
 ## Some extra information
 
-All games are automatically archived into the `games/` folder. The current game is always called `games/current.pgn`, and the archived games always follow the pattern `games/game-yyyymmdd-HHMMSS.pgn`. You can download the archived games and review them using an external application. Each move in that PGN file has a comment specifying who performed each move so you can see which moves you made!
+All games are automatically archived into the `games/` folder. The current game is always called `games/current.pgn`, and the archived games always follow the pattern `games/game-yyyymmdd-HHMMSS.pgn`. You can download the archived games and review them using an external application. Each move in the PGN file has a comment specifying who performed each move so you can see which moves you made!
 
 Finally, this is my first project using Python, so don't be too harsh on my coding skills. If you find any problem, feel free to submit an issue or open a PR and I will be more than happy to take a look at it!
 
 
 ## Credits
 
-Thanks to @timburgan for the initial idea. This project is heavily inspired on his. Also, big thanks to the authors and contributors of [python-chess](https://python-chess.readthedocs.io/en/latest/), [PyGithub](https://pygithub.readthedocs.io/en/latest/) and [EndBug/add-and-commit](https://github.com/EndBug/add-and-commit). Without their libraries, this project would have been impossible :heart:
+Thanks to [@timburgan](https://github.com/timburgan) for the initial idea. This project is heavily inspired on his. Also, big thanks to the authors and contributors of [python-chess](https://python-chess.readthedocs.io/en/latest/), [PyGithub](https://pygithub.readthedocs.io/en/latest/) and [EndBug/add-and-commit](https://github.com/EndBug/add-and-commit). Without their libraries, this project would have been impossible :heart:
 
 
 ## License
