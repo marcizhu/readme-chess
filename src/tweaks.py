@@ -21,11 +21,8 @@ GITHUB_MOVE_ISSUE_LINK = "https://github.com/" + GITHUB_USER + "/" + GITHUB_REPO
 # Link of the new game issue
 GITHUB_NEW_GAME_ISSUE_LINK = "https://github.com/" + GITHUB_USER + "/" + GITHUB_REPO_NAME + "/issues/new?" + urlencode(GITHUB_NEW_GAME_ISSUE_CONTENTS)
 
-# Maximum moves to display
-MAX_LAST_MOVERS = 5
-
-# Top most moves to display
-MAX_TOP_MOVERS = 10
+MAX_LAST_MOVERS = 5 # Maximum moves to display
+MAX_TOP_MOVERS = 10 # Top most moves to display
 
 # Markers
 # Chess board marker
@@ -47,3 +44,25 @@ LAST_MOVES_END_MARKER   = "<!-- END LAST MOVES -->\n"
 # Top movers marker
 TOP_MOVERS_BEGIN_MARKER = "<!-- BEGIN TOP MOVES -->\n"
 TOP_MOVERS_END_MARKER   = "<!-- END TOP MOVES -->\n"
+
+# Comments
+# Comment if the board is invalid
+COMMENT_INVALID_BOARD="{author} Sorry, I can't perform the specified move. The board is invalid!"
+
+# Comment for invalid moves
+COMMENT_INVALID_MOVE="{author} Whaaaat? The move `{move}` is invalid!\nMaybe someone squeezed a move before you. Please try again."
+
+# Comment for invalid new games
+COMMENT_INVALID_NEW_GAME="{author} Sorry, but you cannot start a new game while the old one is still in progress. Only the repo owner can do that."
+
+# Comment for valid moves
+COMMENT_SUCCESSFUL_MOVE="{author} done! Successfully played move `{move}` for current game.\nThanks for playing!"
+
+# Comment for valid new games
+COMMENT_SUCCESSFUL_NEW_GAME="{author} done! New game successfully started!"
+
+# Comment for unknown commands
+COMMENT_UNKNOWN_COMMAND="{author} Sorry, I can't understand the command. Please try again and do not modify the issue title!"
+
+# Comment for game overs
+COMMENT_GAME_OVER="And that's a game over! {winner}! Thanks to {players} for participating!"

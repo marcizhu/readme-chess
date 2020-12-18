@@ -13,15 +13,12 @@ from datetime import datetime
 import src.tweaks as tweaks
 import src.markdown as markdown
 
-
 # TODO:
 # - Try to promote to queen if possible
 # - Save list of all players in a match and mention them on a check mate/end of game
-# - Add info about winner (who wins, remove "Move a black/while piece" message in that round)
 # - Use an image instead of a raw link to start new games
 # - Cleanup, turn this repo into a template. Add info about how to set it up and open source it
 # - Move contents to marcizhu/marcizhu
-
 
 class Action(Enum):
 	UNKNOWN = 0
@@ -86,10 +83,12 @@ def main():
 
 	if action[0] == Action.NEW_GAME:
 		if os.path.exists("games/current.pgn") and issue_author != "@" + tweaks.GITHUB_USER:
+			issue.create_comment(tweaks.COMMENT_INVALID_NEW_GAME.format(author=issue_author))
+			issue.edit(state='closed')
 			sys.exit("ERROR: A current game is in progress. Only the repo owner can start a new issue")
 
 		print("Start new game")
-		issue.create_comment(issue_author + " done! New game successfully started!")
+		issue.create_comment(tweaks.COMMENT_SUCCESSFUL_NEW_GAME.format(author=issue_author))
 		issue.edit(state='closed')
 
 		with open("data/last_moves.txt", 'w') as f:
@@ -121,17 +120,17 @@ def main():
 
 		# Check if move is valid
 		if not move in gameboard.legal_moves:
-			issue.create_comment(issue_author + " Whaaaat? The move `" + action[1] + "` is invalid!\nMaybe someone squished a move before you. Please try again.")
+			issue.create_comment(tweaks.COMMENT_INVALID_MOVE.format(author=issue_author, move=action[1]))
 			issue.edit(state='closed')
 			sys.exit("ERROR: Move is invalid!")
 
 		# Check if board is valid
 		if not gameboard.is_valid():
-			issue.create_comment(issue_author + " Sorry, I can't perform the specified move. The board is invalid!")
+			issue.create_comment(tweaks.COMMENT_INVALID_BOARD.format(author=issue_author))
 			issue.edit(state='closed')
 			sys.exit("ERROR: Board is invalid!")
 		
-		issue.create_comment(issue_author + " done! Successfully played move `" + action[1] + "` for current game.\nThanks for playing!")
+		issue.create_comment(tweaks.COMMENT_SUCCESSFUL_MOVE.format(author=issue_author, move=action[1]))
 		issue.edit(state='closed')
 
 		update_last_moves(action[1] + ": " + issue_author)
@@ -143,7 +142,7 @@ def main():
 		game.headers["Result"] = gameboard.result()
 
 	elif action[0] == Action.UNKNOWN:
-		issue.create_comment(issue_author + " Sorry, I can't understand the command. Please try again and do not modify the issue title!")
+		issue.create_comment(tweaks.COMMENT_UNKNOWN_COMMAND.format(author=issue_author))
 		issue.edit(state='closed')
 		sys.exit("ERROR: Unknown action")
 
@@ -158,6 +157,15 @@ def main():
 
 	# If it is a game over, archive current game
 	if gameboard.is_game_over():
+		winner = gameboard.result()
+		win_msg= "It's a draw"
+
+		if winner == "1-0":
+			win_msg = "White wins"
+		elif winner == "0-1":
+			win_msg = "Black wins"
+
+		issue.create_comment(tweaks.COMMENT_GAME_OVER.format(winner=win_msg, players="everyone")) # TODO: ping players
 		os.rename("games/current.pgn", datetime.now().strftime("games/game-%Y%m%d-%H%M%S.pgn"))
 		os.remove("data/last_moves.txt")
 

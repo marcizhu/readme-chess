@@ -37,7 +37,6 @@ def generate_top_moves():
 	return markdown + "\n"
 
 
-
 def generate_last_moves():
 	markdown = "\n"
 	markdown += "| Move | Author |\n"
