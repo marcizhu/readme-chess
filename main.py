@@ -13,6 +13,17 @@ import src.tweaks as tweaks
 import src.markdown as markdown
 
 
+# TODO:
+# - Try to promote to queen if possible
+# - Use a custom GitHub app instead of relying on the GitHub User Authentication token (!!)
+# - Save list of all players in a match and mention them on a check mate/end of game
+# - Add info about winner (who wins, remove "Move a black/while piece" message in that round)
+# - Save stats about all players, do Top X players list and add it
+# - Use an image instead of a raw link to start new games
+# - Cleanup, turn this repo into a template. Add info about how to set it up and open source it
+# - Move contents to marcizhu/marcizhu
+
+
 class Action(Enum):
 	UNKNOWN = 0
 	MOVE = 1
