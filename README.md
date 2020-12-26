@@ -7,17 +7,13 @@ This template repository contains the source code for a Python Chess bot, togeth
 
 1. Create a new repository based on this template.
 
-2. Tweak the bot settings to your linking. These settings are located in the file `src/tweaks.py`. Specially, make sure to update the following parameters:
-    - `GITHUB_USER`: Your GitHub username
-    - `GITHUB_REPO_NAME`: Name of your newly created GitHub repository
-    
-    The rest of the settings are optional and can be changed to your liking, but leaving them as they are is more than enough.
+2. (Optional) Tweak the bot settings to your linking. These settings are located in the file `src/tweaks.py`. You can leave them as they are if you don't want to change anything.
 
 3. Rename the folder `.github/_workflows` to `.github/workflows` in order to enable the GitHub Actions workflow that does all the magic.
 
 4. Delete this README file and make your own `README.md`. I recommend using `README.template` as a starting point. Keep in mind that the text between the HTML comments like `<-- BEGIN CHESS BOARD -->` and `<-- END CHESS BOARD -->` will be recreated after each move, so don't waste your time changing anything in there ;)
 
-5. Commit and push all the settings and create a new issue with title `Chess: Start new game`. If all goes well, after a few seconds a new response should appear telling you that a new game was successfully started and the issue should be automatically closed. Then, a new commit should appear and your repository should be ready to go! Just click on any of the links on the table of available moves, click on "Submit new issue" and after a few seconds, the move should be performed!
+5. Commit and push all the settings and create a new issue with title `Chess: Start new game` (case insensitive). If all goes well, after a few seconds a new response should appear telling you that a new game was successfully started and the issue should be automatically closed. Then, a new commit should appear and your repository should be ready to go! Just click on any of the links on the table of available moves, click on "Submit new issue" and after a few seconds, the move should be performed!
 
 Don't forget to share, have fun and enjoy your games!
 

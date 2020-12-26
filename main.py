@@ -73,8 +73,8 @@ def parse_issue(title):
 
 
 def main():
-	g = Github(os.environ["GH_ACCESS_TOKEN"])
-	repo = g.get_repo(tweaks.GITHUB_USER + "/" + tweaks.GITHUB_REPO_NAME)
+	g = Github(os.environ["GITHUB_TOKEN"])
+	repo = g.get_repo(os.environ["GITHUB_REPOSITORY"])
 	issue = repo.get_issue(number=int(os.environ["ISSUE_NUMBER"]))
 
 	issue_title  = issue.title
@@ -84,7 +84,7 @@ def main():
 	gameboard = chess.Board()
 
 	if action[0] == Action.NEW_GAME:
-		if os.path.exists("games/current.pgn") and issue_author != "@" + tweaks.GITHUB_USER:
+		if os.path.exists("games/current.pgn") and issue_author != "@" + os.environ["REPOSITORY_OWNER"]:
 			issue.create_comment(tweaks.COMMENT_INVALID_NEW_GAME.format(author=issue_author))
 			issue.edit(state='closed')
 			sys.exit("ERROR: A current game is in progress. Only the repo owner can start a new issue")
@@ -98,8 +98,8 @@ def main():
 
 		# Create new game
 		game = chess.pgn.Game()
-		game.headers["Event"] = tweaks.GITHUB_USER + "'s Online Open Chess Tournament"
-		game.headers["Site"] = "https://github.com/" + tweaks.GITHUB_USER + "/" + tweaks.GITHUB_REPO_NAME
+		game.headers["Event"] = os.environ["REPOSITORY_OWNER"] + "'s Online Open Chess Tournament"
+		game.headers["Site"] = "https://github.com/" + os.environ["GITHUB_REPOSITORY"]
 		game.headers["Date"] = datetime.now().strftime("%Y.%m.%d")
 		game.headers["Round"] = "1"
 
