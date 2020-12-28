@@ -44,11 +44,6 @@ def update_last_moves(line):
 		f.write(line.rstrip('\r\n') + '\n' + content)
 
 
-def update_player_list(player):
-	with open("data/players.txt", "a+") as f:
-		f.write(player + "\n")
-
-
 def replaceTextBetween(originalText, delimeterA, delimterB, replacementText):
 	if originalText.find(delimeterA) == -1 or originalText.find(delimterB) == -1:
 		return originalText
@@ -137,7 +132,6 @@ def main():
 
 		update_last_moves(action[1] + ": " + issue_author)
 		update_top_moves(issue_author)
-		update_player_list(issue_author)
 
 		# Perform move
 		gameboard.push(move)
@@ -168,14 +162,15 @@ def main():
 		elif winner == "0-1":
 			win_msg = "Black wins"
 
-		with open("data/players.txt", "r") as f:
-			lines = [x.strip() for x in f.readlines()]
-			players = ", ".join(set(lines))
+		with open("data/last_moves.txt", "r") as f:
+			lines = f.readlines()
+			pattern = re.compile('.*: (@[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38})', flags=re.I)
+			player_list = [re.match(pattern, line).group(1) for line in lines]
+			players = ", ".join(set(player_list))
 
-		issue.create_comment(tweaks.COMMENT_GAME_OVER.format(winner=win_msg, players=players, num_moves=len(lines), num_players=len(players)))
+		issue.create_comment(tweaks.COMMENT_GAME_OVER.format(outcome=win_msg, players=players, num_moves=len(lines), num_players=len(set(player_list))))
 		os.rename("games/current.pgn", datetime.now().strftime("games/game-%Y%m%d-%H%M%S.pgn"))
 		os.remove("data/last_moves.txt")
-		os.remove("data/players.txt")
 
 	with open("README.md", "r") as file:
 		readme = file.read()
