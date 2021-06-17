@@ -1,0 +1,46 @@
+comments:
+  consecutive_moves: "Sorry {author}, you can't move twice in a row! You can ask someone to play the next turn :D"
+  game_over: |-
+      And that's a game over! {outcome}! This game had {num_moves} moves made by {num_players} players.
+      
+      Thanks to {players} for participating!
+  invalid_board: "{author} Sorry, I can't perform the specified move. The board is invalid!"
+  invalid_move: |-
+      {author} Whaaaat? The move `{move}` is invalid!
+      Maybe someone squeezed a move before you. Please try again.
+  invalid_new_game: "{author} Sorry, but you cannot start a new game while the old one is still in progress. Only the repo owner can do that."
+  successful_move: |-
+      {author} done! Successfully played move `{move}` for current game.
+      Thanks for playing!
+  successful_new_game: "{author} done! New game successfully started!"
+  unknown_command: "{author} Sorry, I can't understand the command. Please try again and do not modify the issue title!"
+
+issues:
+  link: "https://github.com/{repo}/issues/new?{params}"
+  move:
+    body: "Please do not change the title. Just click \"Submit new issue\". You don't need to do anything else :D"
+    title: "Chess: Move {source} to {dest}"
+  new_game:
+    body: "Please do not change the title. Just click \"Submit new issue\". You don't need to do anything else :D"
+    title: "Chess: Start new game"
+
+markers:
+  board:
+    begin: "<!-- BEGIN CHESS BOARD -->\n"
+    end: "<!-- END CHESS BOARD -->\n"
+  last_moves:
+    begin: "<!-- BEGIN LAST MOVES -->\n"
+    end: "<!-- END LAST MOVES -->\n"
+  moves:
+    begin: "<!-- BEGIN MOVES LIST -->\n"
+    end: "<!-- END MOVES LIST -->\n"
+  top_moves:
+    begin: "<!-- BEGIN TOP MOVES -->\n"
+    end: "<!-- END TOP MOVES -->\n"
+  turn:
+    begin: "<!-- BEGIN TURN -->"
+    end: "<!-- END TURN -->"
+
+misc:
+  max_last_moves: 5
+  max_top_moves: 10

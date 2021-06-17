@@ -1,0 +1,12 @@
+moves:
+  - author: '@player1'
+    owner: '@player1'
+    move: 'Chess: Start new game'
+
+  - author: '@player1'
+    owner: '@player1'
+    move: 'Chess: Move D2 to D4'
+
+  - author: '@player1'
+    owner: '@player1'
+    move: 'Chess: Start new game'
