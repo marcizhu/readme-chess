@@ -11,9 +11,6 @@ class Issue:
 
     @property
     def title(self):
-        if(self.__title == ''):
-            self.__title = input('Enter issue title: ')
-
         return self.__title
 
     def create_comment(self, text):
