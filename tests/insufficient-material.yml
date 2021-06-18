@@ -1,3 +1,4 @@
+name: 'Stockfish vs AlphaZero (Draw, insufficient material)'
 moves:
   - author: '@marcizhu'
     owner: '@marcizhu'
@@ -34,6 +35,7 @@ moves:
   - author: '@AlphaZero'
     owner: '@marcizhu'
     move: 'Chess: Move C5 to B4'
+    is_capture: true
 
   - author: '@Stockfish'
     owner: '@marcizhu'
@@ -66,10 +68,12 @@ moves:
   - author: '@AlphaZero'
     owner: '@marcizhu'
     move: 'Chess: Move E5 to D4'
+    is_capture: true
 
   - author: '@Stockfish'
     owner: '@marcizhu'
     move: 'Chess: Move C3 to D4'
+    is_capture: true
 
   - author: '@AlphaZero'
     owner: '@marcizhu'
@@ -90,10 +94,12 @@ moves:
   - author: '@AlphaZero'
     owner: '@marcizhu'
     move: 'Chess: Move A5 to D2'
+    is_capture: true
 
   - author: '@Stockfish'
     owner: '@marcizhu'
     move: 'Chess: Move E5 to F6'
+    is_capture: true
 
   - author: '@AlphaZero'
     owner: '@marcizhu'
@@ -106,18 +112,22 @@ moves:
   - author: '@AlphaZero'
     owner: '@marcizhu'
     move: 'Chess: Move A5 to C4'
+    is_capture: true
 
   - author: '@Stockfish'
     owner: '@marcizhu'
     move: 'Chess: Move C1 to D2'
+    is_capture: true
 
   - author: '@AlphaZero'
     owner: '@marcizhu'
     move: 'Chess: Move C4 to D2'
+    is_capture: true
 
   - author: '@Stockfish'
     owner: '@marcizhu'
     move: 'Chess: Move D3 to D2'
+    is_capture: true
 
   - author: '@AlphaZero'
     owner: '@marcizhu'
@@ -126,6 +136,7 @@ moves:
   - author: '@Stockfish'
     owner: '@marcizhu'
     move: 'Chess: Move F6 to G7'
+    is_capture: true
 
   - author: '@AlphaZero'
     owner: '@marcizhu'
@@ -178,6 +189,7 @@ moves:
   - author: '@AlphaZero'
     owner: '@marcizhu'
     move: 'Chess: Move G5 to G7'
+    is_capture: true
 
   - author: '@Stockfish'
     owner: '@marcizhu'
@@ -190,14 +202,17 @@ moves:
   - author: '@Stockfish'
     owner: '@marcizhu'
     move: 'Chess: Move D5 to C6'
+    is_capture: true
 
   - author: '@AlphaZero'
     owner: '@marcizhu'
     move: 'Chess: Move E4 to C6'
+    is_capture: true
 
   - author: '@Stockfish'
     owner: '@marcizhu'
     move: 'Chess: Move D2 to D6'
+    is_capture: true
 
   - author: '@AlphaZero'
     owner: '@marcizhu'
@@ -218,10 +233,12 @@ moves:
   - author: '@AlphaZero'
     owner: '@marcizhu'
     move: 'Chess: Move F5 to C5'
+    is_capture: true
 
   - author: '@Stockfish'
     owner: '@marcizhu'
     move: 'Chess: Move D6 to C5'
+    is_capture: true
 
   - author: '@AlphaZero'
     owner: '@marcizhu'
@@ -238,10 +255,12 @@ moves:
   - author: '@Stockfish'
     owner: '@marcizhu'
     move: 'Chess: Move C5 to E5'
+    is_capture: true
 
   - author: '@AlphaZero'
     owner: '@marcizhu'
     move: 'Chess: Move E8 to E5'
+    is_capture: true
 
   - author: '@Stockfish'
     owner: '@marcizhu'
@@ -390,10 +409,12 @@ moves:
   - author: '@Stockfish'
     owner: '@marcizhu'
     move: 'Chess: Move A3 to B4'
+    is_capture: true
 
   - author: '@AlphaZero'
     owner: '@marcizhu'
     move: 'Chess: Move C4 to B4'
+    is_capture: true
 
   - author: '@Stockfish'
     owner: '@marcizhu'
@@ -430,14 +451,17 @@ moves:
   - author: '@Stockfish'
     owner: '@marcizhu'
     move: 'Chess: Move E3 to A3'
+    is_capture: true
 
   - author: '@AlphaZero'
     owner: '@marcizhu'
     move: 'Chess: Move A8 to A3'
+    is_capture: true
 
   - author: '@Stockfish'
     owner: '@marcizhu'
     move: 'Chess: Move B4 to A3'
+    is_capture: true
 
   - author: '@AlphaZero'
     owner: '@marcizhu'
@@ -514,6 +538,7 @@ moves:
   - author: '@AlphaZero'
     owner: '@marcizhu'
     move: 'Chess: Move F2 to G3'
+    is_capture: true
 
   - author: '@Stockfish'
     owner: '@marcizhu'
@@ -522,6 +547,7 @@ moves:
   - author: '@AlphaZero'
     owner: '@marcizhu'
     move: 'Chess: Move G3 to F4'
+    is_capture: true
 
   - author: '@Stockfish'
     owner: '@marcizhu'
@@ -542,6 +568,7 @@ moves:
   - author: '@Stockfish'
     owner: '@marcizhu'
     move: 'Chess: Move F6 to H5'
+    is_capture: true
 
   - author: '@AlphaZero'
     owner: '@marcizhu'
@@ -554,6 +581,7 @@ moves:
   - author: '@AlphaZero'
     owner: '@marcizhu'
     move: 'Chess: Move G4 to H4'
+    is_capture: true
 
   - author: '@Stockfish'
     owner: '@marcizhu'
@@ -1038,6 +1066,7 @@ moves:
   - author: '@Stockfish'
     owner: '@marcizhu'
     move: 'Chess: Move E3 to F2'
+    is_capture: true
 
   - author: '@AlphaZero'
     owner: '@marcizhu'
@@ -1086,3 +1115,4 @@ moves:
   - author: '@Stockfish'
     owner: '@marcizhu'
     move: 'Chess: Move D2 to B1'
+    is_capture: true

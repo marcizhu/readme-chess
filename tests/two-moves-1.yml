@@ -1,3 +1,4 @@
+name: Two consecutive moves (Start new game and first move)
 moves:
   - author: '@player2'
     owner: '@player2'

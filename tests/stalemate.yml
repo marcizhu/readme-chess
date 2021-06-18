@@ -1,3 +1,4 @@
+name: Stalemate
 moves:
   - author: '@player1'
     owner: '@player1'
@@ -26,6 +27,7 @@ moves:
   - author: '@player2'
     owner: '@player1'
     move: 'Chess: Move D5 to C4'
+    is_capture: true
 
   - author: '@player1'
     owner: '@player1'
@@ -38,6 +40,7 @@ moves:
   - author: '@player1'
     owner: '@player1'
     move: 'Chess: Move F1 to C4'
+    is_capture: true
 
   - author: '@player2'
     owner: '@player1'
@@ -106,10 +109,12 @@ moves:
   - author: '@player2'
     owner: '@player1'
     move: 'Chess: Move G4 to F3'
+    is_capture: true
 
   - author: '@player1'
     owner: '@player1'
     move: 'Chess: Move E2 to F3'
+    is_capture: true
 
   - author: '@player2'
     owner: '@player1'
@@ -154,26 +159,32 @@ moves:
   - author: '@player2'
     owner: '@player1'
     move: 'Chess: Move C6 to D5'
+    is_capture: true
 
   - author: '@player1'
     owner: '@player1'
     move: 'Chess: Move B3 to D5'
+    is_capture: true
 
   - author: '@player2'
     owner: '@player1'
     move: 'Chess: Move F6 to D5'
+    is_capture: true
 
   - author: '@player1'
     owner: '@player1'
     move: 'Chess: Move C3 to D5'
+    is_capture: true
 
   - author: '@player2'
     owner: '@player1'
     move: 'Chess: Move B6 to D5'
+    is_capture: true
 
   - author: '@player1'
     owner: '@player1'
     move: 'Chess: Move D1 to D5'
+    is_capture: true
 
   - author: '@player2'
     owner: '@player1'
@@ -202,10 +213,12 @@ moves:
   - author: '@player2'
     owner: '@player1'
     move: 'Chess: Move D8 to D7'
+    is_capture: true
 
   - author: '@player1'
     owner: '@player1'
     move: 'Chess: Move D3 to D7'
+    is_capture: true
 
   - author: '@player2'
     owner: '@player1'
@@ -286,6 +299,7 @@ moves:
   - author: '@player1'
     owner: '@player1'
     move: 'Chess: Move H8 to H7'
+    is_capture: true
 
   - author: '@player2'
     owner: '@player1'
@@ -318,10 +332,12 @@ moves:
   - author: '@player1'
     owner: '@player1'
     move: 'Chess: Move B8 to D8'
+    is_capture: true
 
   - author: '@player2'
     owner: '@player1'
     move: 'Chess: Move D1 to D8'
+    is_capture: true
 
   - author: '@player1'
     owner: '@player1'
@@ -334,6 +350,7 @@ moves:
   - author: '@player1'
     owner: '@player1'
     move: 'Chess: Move F7 to G6'
+    is_capture: true
 
   - author: '@player2'
     owner: '@player1'
@@ -406,6 +423,7 @@ moves:
   - author: '@player1'
     owner: '@player1'
     move: 'Chess: Move G5 to F6'
+    is_capture: true
 
   - author: '@player2'
     owner: '@player1'
@@ -454,14 +472,17 @@ moves:
   - author: '@player1'
     owner: '@player1'
     move: 'Chess: Move C8 to A6'
+    is_capture: true
 
   - author: '@player2'
     owner: '@player1'
     move: 'Chess: Move D3 to H3'
+    is_capture: true
 
   - author: '@player1'
     owner: '@player1'
     move: 'Chess: Move H2 to H3'
+    is_capture: true
 
   - author: '@player2'
     owner: '@player1'
@@ -470,3 +491,4 @@ moves:
   - author: '@player1'
     owner: '@player1'
     move: 'Chess: Move A6 to E6'
+    is_capture: true

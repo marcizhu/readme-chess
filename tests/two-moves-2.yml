@@ -1,3 +1,4 @@
+name: Two invalid consecutive moves
 moves:
   - author: '@player1'
     owner: '@player1'
@@ -10,3 +11,4 @@ moves:
   - author: '@player2'
     owner: '@player2'
     move: 'Chess: Move E7 to E5'
+    is_invalid: true

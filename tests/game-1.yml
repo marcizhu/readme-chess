@@ -1,3 +1,4 @@
+name: First game on github.com/marcizhu/marcizhu
 moves:
   - author: '@marcizhu'
     owner: '@marcizhu'
@@ -66,10 +67,12 @@ moves:
   - author: '@JeppeSRC'
     owner: '@marcizhu'
     move: 'Chess: Move B4 to C3'
+    is_capture: true
 
   - author: '@marcizhu'
     owner: '@marcizhu'
     move: 'Chess: Move B3 to C3'
+    is_capture: true
 
   - author: '@Gaztin'
     owner: '@marcizhu'
@@ -90,10 +93,12 @@ moves:
   - author: '@DaniGmzGnz'
     owner: '@marcizhu'
     move: 'Chess: Move C6 to D4'
+    is_capture: true
 
   - author: '@marcizhu'
     owner: '@marcizhu'
     move: 'Chess: Move F3 to D4'
+    is_capture: true
 
   - author: '@LibertyAm'
     owner: '@marcizhu'
@@ -110,6 +115,7 @@ moves:
   - author: '@marcizhu'
     owner: '@marcizhu'
     move: 'Chess: Move F4 to E5'
+    is_capture: true
 
   - author: '@Anthony10700'
     owner: '@marcizhu'
@@ -126,14 +132,17 @@ moves:
   - author: '@marcizhu'
     owner: '@marcizhu'
     move: 'Chess: Move C1 to H6'
+    is_capture: true
 
   - author: '@JeppeSRC'
     owner: '@marcizhu'
     move: 'Chess: Move G4 to E5'
+    is_capture: true
 
   - author: '@marcizhu'
     owner: '@marcizhu'
     move: 'Chess: Move C3 to D5'
+    is_capture: true
 
   - author: '@JeppeSRC'
     owner: '@marcizhu'
@@ -142,6 +151,7 @@ moves:
   - author: '@CescHolly'
     owner: '@marcizhu'
     move: 'Chess: Move D5 to E7'
+    is_capture: true
 
   - author: '@marcizhu'
     owner: '@marcizhu'
@@ -158,6 +168,7 @@ moves:
   - author: '@marcizhu'
     owner: '@marcizhu'
     move: 'Chess: Move E3 to E5'
+    is_capture: true
 
   - author: '@Jurymax99'
     owner: '@marcizhu'
@@ -170,10 +181,12 @@ moves:
   - author: '@LibertyAm'
     owner: '@marcizhu'
     move: 'Chess: Move D8 to D4'
+    is_capture: true
 
   - author: '@marcizhu'
     owner: '@marcizhu'
     move: 'Chess: Move D1 to D4'
+    is_capture: true
 
   - author: '@LibertyAm'
     owner: '@marcizhu'
@@ -186,10 +199,12 @@ moves:
   - author: '@LibertyAm'
     owner: '@marcizhu'
     move: 'Chess: Move F5 to D7'
+    is_capture: true
 
   - author: '@marcizhu'
     owner: '@marcizhu'
     move: 'Chess: Move C6 to A5'
+    is_capture: true
 
   - author: '@LibertyAm'
     owner: '@marcizhu'
@@ -214,6 +229,7 @@ moves:
   - author: '@marcizhu'
     owner: '@marcizhu'
     move: 'Chess: Move E7 to D7'
+    is_capture: true
 
   - author: '@maximyudayev'
     owner: '@marcizhu'
@@ -254,3 +270,4 @@ moves:
   - author: '@marcizhu'
     owner: '@marcizhu'
     move: 'Chess: Move B3 to C5'
+    is_winner: true

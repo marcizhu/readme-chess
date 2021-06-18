@@ -1,3 +1,4 @@
+name: Scholar's Mate
 moves:
   - author: '@player1'
     owner: '@player1'
@@ -30,3 +31,5 @@ moves:
   - author: '@player1'
     owner: '@player1'
     move: 'Chess: Move H5 to F7' # Qxf7#
+    is_capture: true
+    is_winner: true

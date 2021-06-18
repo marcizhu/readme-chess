@@ -1,3 +1,4 @@
+name: Restart game by non-repo owner
 moves:
   - author: '@player1'
     owner: '@player1'

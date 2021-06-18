@@ -12,6 +12,7 @@ import yaml
 from github import Github
 
 import src.markdown as markdown
+import src.selftest as selftest
 import src.mockGithub as mockGithub
 
 # TODO: Use an image instead of a raw link to start new games
@@ -85,7 +86,7 @@ def main(issue, issue_author, repo_owner):
         if os.path.exists("games/current.pgn") and issue_author != repo_owner:
             issue.create_comment(settings['comments']['invalid_new_game'].format(author=issue_author))
             issue.edit(state='closed')
-            sys.exit("ERROR: A current game is in progress. Only the repo owner can start a new game")
+            return False, "ERROR: A current game is in progress. Only the repo owner can start a new game"
 
         issue.create_comment(settings['comments']['successful_new_game'].format(author=issue_author))
         issue.edit(state='closed')
@@ -102,7 +103,7 @@ def main(issue, issue_author, repo_owner):
 
     elif action[0] == Action.MOVE:
         if not os.path.exists("games/current.pgn"):
-            sys.exit("ERROR: There is no game in progress! Start a new game first")
+            return False, "ERROR: There is no game in progress! Start a new game first"
 
         # Load game from "games/current.pgn"
         with open("games/current.pgn") as pgn_file:
@@ -127,19 +128,19 @@ def main(issue, issue_author, repo_owner):
         if last_player == issue_author and "Start game" not in last_move:
             issue.create_comment(settings['comments']['consecutive_moves'].format(author=issue_author))
             issue.edit(state='closed', labels=["Invalid"])
-            sys.exit("ERROR: Two moves in a row!")
+            return False, "ERROR: Two moves in a row!"
 
         # Check if move is valid
         if move not in gameboard.legal_moves:
             issue.create_comment(settings['comments']['invalid_move'].format(author=issue_author, move=action[1]))
             issue.edit(state='closed', labels=["Invalid"])
-            sys.exit("ERROR: Move is invalid!")
+            return False, "ERROR: Move is invalid!"
 
         # Check if board is valid
         if not gameboard.is_valid():
             issue.create_comment(settings['comments']['invalid_board'].format(author=issue_author))
             issue.edit(state='closed', labels=["Invalid"])
-            sys.exit("ERROR: Board is invalid!")
+            return False, "ERROR: Board is invalid!"
 
         issue_labels = ["⚔️ Capture!"] if gameboard.is_capture(move) else []
         issue_labels += ["White" if gameboard.turn == chess.WHITE else "Black"]
@@ -158,7 +159,7 @@ def main(issue, issue_author, repo_owner):
     elif action[0] == Action.UNKNOWN:
         issue.create_comment(settings['comments']['unknown_command'].format(author=issue_author))
         issue.edit(state='closed', labels=["Invalid"])
-        sys.exit("ERROR: Unknown action")
+        return False, "ERROR: Unknown action"
 
     # Save game to "games/current.pgn"
     print(game, file=open("games/current.pgn", "w"), end="\n\n")
@@ -205,34 +206,20 @@ def main(issue, issue_author, repo_owner):
             last_moves=last_moves,
             top_moves=markdown.generate_top_moves()))
 
+    return True, ''
+
 
 if __name__ == '__main__':
-    if len(sys.argv) >= 2 and sys.argv[1] == '--debug':
-        print('DEBUG: Running in debug mode')
-        issue = mockGithub.Issue()
-        issue_author = "@" + (input('Enter issue author [marcizhu]: ') or 'marcizhu')
-        repo_owner = "@" + (input('Enter repo owner [marcizhu]: ') or 'marcizhu')
-        os.environ['GITHUB_REPOSITORY'] = repo_owner[1:] + "/" + repo_owner[1:]
-    
-    elif len(sys.argv) >= 3 and sys.argv[1] == '--test':
-        with open(sys.argv[2], 'r') as test_file:
-            test_data = yaml.load(test_file, Loader=yaml.FullLoader)
-
-        for move_data in test_data['moves']:
-            issue = mockGithub.Issue(move_data['move'])
-            issue_author = move_data['author']
-            repo_owner = move_data['owner']
-            os.environ['GITHUB_REPOSITORY'] = repo_owner[1:] + "/" + repo_owner[1:]
-
-            main(issue, issue_author, repo_owner)
-            print('---')
-    
+    if len(sys.argv) >= 2 and sys.argv[1] == '--self-test':
+        selftest.run(main)
         sys.exit(0)
-
     else:
         repo = Github(os.environ["GITHUB_TOKEN"]).get_repo(os.environ["GITHUB_REPOSITORY"])
         issue = repo.get_issue(number=int(os.environ["ISSUE_NUMBER"]))
         issue_author = "@" + issue.user.login
         repo_owner = "@" + os.environ["REPOSITORY_OWNER"]
 
-    main(issue, issue_author, repo_owner)
+    ret, reason = main(issue, issue_author, repo_owner)
+
+    if ret == False:
+        sys.exit(reson)

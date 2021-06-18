@@ -1,3 +1,4 @@
+name: Fool's Mate
 moves:
   - author: '@player1'
     owner: '@player1'
@@ -18,3 +19,4 @@ moves:
   - author: '@player1'
     owner: '@player1'
     move: 'Chess: Move D8 to H4' # Qh4#
+    is_winner: true
