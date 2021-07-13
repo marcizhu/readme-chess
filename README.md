@@ -27,7 +27,7 @@ Finally, this is my first project using Python, so don't be too harsh on my codi
 
 ## Credits
 
-Thanks to [@timburgan](https://github.com/timburgan) for the initial idea. This project is heavily inspired on his. Also, big thanks to the authors and contributors of [python-chess](https://python-chess.readthedocs.io/en/latest/), [PyGithub](https://pygithub.readthedocs.io/en/latest/) and [EndBug/add-and-commit](https://github.com/EndBug/add-and-commit). Without their libraries, this project would have been impossible :heart:
+Thanks to [@timburgan](https://github.com/timburgan) for the initial idea. This project is heavily inspired on his. Also, big thanks to the authors and contributors of [python-chess](https://python-chess.readthedocs.io/en/latest/), [PyGithub](https://pygithub.readthedocs.io/en/latest/). Without their libraries, this project would have been impossible :heart:
 
 
 ## License
