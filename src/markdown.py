@@ -82,13 +82,13 @@ def generate_last_moves():
 def generate_moves_list(board):
     # Create dictionary and fill it
     moves = list(board.legal_moves)
-    moves_dict = defaultdict(list)
+    moves_dict = defaultdict(set)
 
     for move in moves:
         source = chess.SQUARE_NAMES[move.from_square].upper()
         dest   = chess.SQUARE_NAMES[move.to_square].upper()
 
-        moves_dict[source].append(dest)
+        moves_dict[source].add(dest)
 
     # Write everything in Markdown format
     markdown = ""
