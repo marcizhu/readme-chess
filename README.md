@@ -13,21 +13,21 @@ This template repository contains the source code for a Python Chess bot, togeth
 
 4. Delete this README file and make your own `README.md`. I recommend using `README.template` as a starting point. Keep in mind that the text between the HTML comments like `<-- BEGIN CHESS BOARD -->` and `<-- END CHESS BOARD -->` will be recreated after each move, so don't waste your time changing anything in there ;)
 
-5. Commit and push all the settings and create a new issue with title `Chess: Start new game` (case insensitive). If all goes well, after a few seconds a new response should appear telling you that a new game was successfully started and the issue should be automatically closed. Then, a new commit should appear and your repository should be ready to go! Just click on any of the links on the table of available moves, click on "Submit new issue" and after a few seconds, the move should be performed!
+5. Commit and push all the settings and create a new issue with title `Chess: Start new game` (case insensitive). If all goes well, after a few seconds a new response should appear telling you that a new game was successfully started and the issue should be automatically closed. After that, refresh your repository in order to see the changes done by the bot and your repository is ready to go! Just click on any of the links on the table of available moves, click on "Submit new issue" and after a few seconds, the move will be played!
 
 Don't forget to share, have fun and enjoy your games!
 
 
 ## Some extra information
 
-All games are automatically archived into the `games/` folder. The current game is always called `games/current.pgn`, and the archived games always follow the pattern `games/game-yyyymmdd-HHMMSS.pgn`. You can download the archived games and review them using an external application. Each move in the PGN file has a comment specifying who performed each move so you can see which moves you made!
+All games are automatically archived into the `games/` folder in PGN format. The current game is always called `games/current.pgn`, and the archived games always follow the pattern `games/game-yyyymmdd-HHMMSS.pgn`. You can download the archived games and review them using an external application. Each move in the PGN file has a comment specifying who performed each move so you can see which moves you played!
 
-Finally, this is my first project using Python, so don't be too harsh on my coding skills. If you find any problem, feel free to submit an issue or open a PR and I will be more than happy to take a look at it!
+Finally, if you find any problem, feel free to submit an issue or open a PR and I will be more than happy to take a look at it!
 
 
 ## Credits
 
-Thanks to [@timburgan](https://github.com/timburgan) for the initial idea. This project is heavily inspired on his. Also, big thanks to the authors and contributors of [python-chess](https://python-chess.readthedocs.io/en/latest/), [PyGithub](https://pygithub.readthedocs.io/en/latest/). Without their libraries, this project would have been impossible :heart:
+Thanks to [@timburgan](https://github.com/timburgan) for the initial idea. This project is heavily inspired on his. Also, big thanks to the authors and contributors of [python-chess](https://python-chess.readthedocs.io/en/latest/) and [PyGithub](https://pygithub.readthedocs.io/en/latest/). Without their libraries, this project would have been impossible :heart:
 
 
 ## License
