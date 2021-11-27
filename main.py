@@ -1,6 +1,5 @@
 import re
 import os
-import os.path
 import sys
 import ast
 from enum import Enum
@@ -13,7 +12,6 @@ from github import Github
 
 import src.markdown as markdown
 import src.selftest as selftest
-import src.mockGithub as mockGithub
 
 # TODO: Use an image instead of a raw link to start new games
 
@@ -117,6 +115,11 @@ def main(issue, issue_author, repo_owner):
 
         for move in game.mainline_moves():
             gameboard.push(move)
+
+        if action[1][:2] == action[1][2:]:
+            issue.create_comment(settings['comments']['invalid_move'].format(author=issue_author, move=action[1]))
+            issue.edit(state='closed', labels=['Invalid'])
+            return False, 'ERROR: Move is invalid!'
 
         # Try to move with promotion to queen
         if chess.Move.from_uci(action[1] + 'q') in gameboard.legal_moves:

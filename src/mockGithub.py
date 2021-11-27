@@ -47,14 +47,14 @@ class Issue:
 
     def expectations_fulfilled(self, ):
         if len(self.__expected_labels) != 0:
-            return False, "Missing expected labels: " + str(self.__expected_labels)
+            return False, f'Missing expected labels: {self.__expected_labels}'
         if len(self.__expected_comments) != 0:
-            return False, "Missing expected comments: " + str(self.__expected_comments)
+            return False, f'Missing expected comments: {self.__expected_comments}'
         if len(self.__unexpected_labels) != 0:
-            return False, "Unexpected labels: " + str(self.__unexpected_labels)
+            return False, f'Unexpected labels: {self.__unexpected_labels}'
         if len(self.__unexpected_comments) != 0:
-            return False, "Unexpected comments: " + str(self.__unexpected_comments)
+            return False, f'Unexpected comments: {self.__unexpected_comments}'
         if self.__closed == False:
-            return False, "Issue not closed"
+            return False, 'Issue not closed'
 
         return True, None

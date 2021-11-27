@@ -1,12 +1,13 @@
-name: Two valid consecutive moves
+name: Invalid move (moving nowhere)
 owner: '@player1'
 moves:
   - author: '@player1'
     move: 'Chess: Start new game'
 
   - author: '@player2'
-    move: 'Chess: Move E2 to E4'
+    move: 'Chess: Move E2 to E2'
+    is_invalid: true
 
-  - author: '@player2'
+  - author: '@player1'
     move: 'Chess: Move E7 to E5'
-    is_consecutive: true
+    is_invalid: true
