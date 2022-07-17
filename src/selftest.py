@@ -89,6 +89,6 @@ def run(main_fn):
     total = passed + failed
 
     print()
-    print(f'\u001b[1m\u001b[33m    {total} total', end='');
-    print(f'\u001b[1m\u001b[32m   {passed} passed', end='');
-    print(f'\u001b[1m\u001b[31m   {failed} failed');
+    print(f'\u001b[1m\u001b[33m    {total} total', end='')
+    print(f'\u001b[1m\u001b[32m   {passed} passed', end='')
+    print(f'\u001b[1m\u001b[31m   {failed} failed')
