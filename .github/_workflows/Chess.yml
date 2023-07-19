@@ -6,6 +6,8 @@ on:
 
 jobs:
   move:
+    permissions:
+      issues: write
     runs-on: ubuntu-latest
     if: startsWith(github.event.issue.title, 'Chess:')
 
