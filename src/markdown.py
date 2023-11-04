@@ -123,13 +123,17 @@ def board_to_markdown(board):
     markdown += "|   | A | B | C | D | E | F | G | H |   |\n"
     markdown += "|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|\n"
 
+    #Check if it's Black's turn
+    is_black_turn = not board.turn
+
     # Write board
     for row in range(1, 9):
-        markdown += "| **" + str(9 - row) + "** | "
-        for elem in board_list[row - 1]:
+        adjusted_row = 9 - row if not is_black_turn else row
+        markdown += "| **" + str(adjusted_row) + "** | "
+        for elem in board_list[8-row] if is_black_turn else board_list[row - 1]:
             markdown += "<img src=\"{}\" width=50px> | ".format(images.get(elem, "???"))
 
-        markdown += "**" + str(9 - row) + "** |\n"
+        markdown += "**" + str(adjusted_row) + "** |\n"
 
     # Write footer in Markdown format
     markdown += "|   | **A** | **B** | **C** | **D** | **E** | **F** | **G** | **H** |   |\n"
