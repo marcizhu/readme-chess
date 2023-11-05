@@ -124,16 +124,20 @@ def board_to_markdown(board):
     markdown += "|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|\n"
 
     #Check if it's Black's turn
-    is_black_turn = not board.turn
+    is_black_turn = board.turn == chess.BLACK
 
+    #Get Rows
+    rows = range(1, 9)
+    if is_black_turn:
+        rows = reversed(rows)
+    
     # Write board
-    for row in range(1, 9):
-        adjusted_row = 9 - row if not is_black_turn else row
-        markdown += "| **" + str(adjusted_row) + "** | "
-        for elem in board_list[8-row] if is_black_turn else board_list[row - 1]:
+    for row in rows:
+        markdown += "| **" + str(9 - row) + "** | "
+        for elem in board_list[row - 1]:
             markdown += "<img src=\"{}\" width=50px> | ".format(images.get(elem, "???"))
 
-        markdown += "**" + str(adjusted_row) + "** |\n"
+        markdown += "**" + str(9 - row) + "** |\n"
 
     # Write footer in Markdown format
     markdown += "|   | **A** | **B** | **C** | **D** | **E** | **F** | **G** | **H** |   |\n"
