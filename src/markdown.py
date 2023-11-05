@@ -123,8 +123,8 @@ def board_to_markdown(board):
     markdown += "|   | A | B | C | D | E | F | G | H |   |\n"
     markdown += "|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|\n"
 
-    #Check if it's Black's turn
-    is_black_turn = not board.turn
+    # Check if it's Black's turn
+    is_black_turn = board.turn == chess.BLACK
 
     # Write board
     for row in range(1, 9):
